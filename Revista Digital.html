@@ -73,6 +73,9 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    height:min(80vh, 1020px);
+    max-width:92vw;
+    aspect-ratio:1414 / 1000;
   }
   #book-shell::before{
     content:"";
@@ -89,15 +92,22 @@
   #book{
     position:relative;
     z-index:1;
-    height:min(80vh, 1020px);
-    max-width:92vw;
-    aspect-ratio:1414 / 1000;
+    width:100%;
+    height:100%;
     box-shadow:
       0 25px 60px rgba(0,0,0,.55),
       0 8px 20px rgba(0,0,0,.4),
       0 0 0 1px rgba(255,255,255,.04);
     border-radius:3px;
     background:#e4e6eb;
+  }
+  /* Por debajo de ~650px de ancho la librería cambia a vista de una
+     sola página (portrait); el contenedor debe seguir esa proporción
+     (1414:2000) en vez de la de spread completo (1414:1000). */
+  @media (max-width:650px){
+    #book-shell{
+      aspect-ratio:1414 / 2000;
+    }
   }
   .book-gutter{
     position:absolute;
