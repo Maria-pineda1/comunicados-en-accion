@@ -11,6 +11,9 @@ echo.
 echo Sincronizando "Revista Digital.html" con "index.html"...
 copy /Y "Revista Digital.html" "index.html" >nul
 
+echo Generando lista de paginas (pages.js)...
+powershell -NoProfile -Command "$n = Get-ChildItem -Filter '*.png' | Where-Object { $_.BaseName -match '^\d+$' } | ForEach-Object { [int]$_.BaseName } | Sort-Object; 'window.PAGES = [' + ($n -join ',') + '];' | Set-Content -Encoding ASCII pages.js"
+
 echo Revisando cambios...
 git add -A
 
