@@ -17,6 +17,16 @@ copy /Y "Revista Digital.html" "index.html" >nul
 echo Generando lista de paginas (pages.js)...
 powershell -NoProfile -Command "$n = Get-ChildItem -Filter '*.jpg' | Where-Object { $_.BaseName -match '^\d+$' } | ForEach-Object { [int]$_.BaseName } | Sort-Object; 'window.PAGES = [' + ($n -join ',') + '];' | Set-Content -Encoding ASCII pages.js"
 
+findstr /C:"[]" pages.js >nul
+if %errorlevel%==0 (
+    echo.
+    echo ERROR: no se encontraron imagenes numeradas ^(1.jpg, 2.jpg...^) en esta carpeta.
+    echo No se subio nada para no dejar la revista vacia.
+    echo.
+    pause
+    exit /b 1
+)
+
 echo Revisando cambios...
 git add -A
 

@@ -35,9 +35,5 @@ foreach ($p in $pngs) {
   }
 }
 
-# Quita los JPG que ya no tienen su PNG (para que el sitio refleje lo mismo que tu carpeta)
-$numerosPng = $pngs | ForEach-Object { $_.BaseName }
-Get-ChildItem -Filter '*.jpg' | Where-Object { $_.BaseName -match '^\d+$' -and ($numerosPng -notcontains $_.BaseName) } | Remove-Item -Force
-
 $mbJpg = [math]::Round(((Get-ChildItem -Filter '*.jpg' | Measure-Object Length -Sum).Sum) / 1MB, 1)
 Write-Output "Imagenes convertidas: $hechas | Peso total JPG: $mbJpg MB"
