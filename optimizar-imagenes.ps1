@@ -15,7 +15,7 @@ $hechas = 0
 
 foreach ($p in $pngs) {
   $out = Join-Path $PSScriptRoot ($p.BaseName + '.jpg')
-  if ((Test-Path $out) -and ((Get-Item $out).LastWriteTime -ge $p.LastWriteTime)) { continue }
+  if (Test-Path $out) { continue }
 
   $src = [System.Drawing.Image]::FromFile($p.FullName)
   try {
