@@ -563,7 +563,8 @@
     bookEl.appendChild(gutter);
 
     var totalPages = pageNumbers.length;
-    document.getElementById('totalPages').textContent = totalPages;
+    var lastNum = pageNumbers[pageNumbers.length - 1];
+    document.getElementById('totalPages').textContent = lastNum;
 
     var curPageEl = document.getElementById('curPage');
     var progressFill = document.getElementById('progress-fill');
@@ -571,7 +572,7 @@
     var nextBtn = document.getElementById('nextBtn');
 
     function updateUI(index){
-      curPageEl.textContent = index + 1;
+      curPageEl.textContent = pageNumbers[index];
       progressFill.style.width = ((index + 1) / totalPages * 100) + '%';
       prevBtn.disabled = index <= 0;
       nextBtn.disabled = index >= totalPages - 1;
@@ -639,7 +640,7 @@
         t.textContent = it.t;
         var pg = document.createElement('span');
         pg.className = 'pg';
-        pg.textContent = 'Pág. ' + (idx + 1);
+        pg.textContent = 'Pág. ' + it.p;
         b.appendChild(t);
         b.appendChild(pg);
         b.addEventListener('click', function(){
@@ -686,7 +687,7 @@
     }
     function vShow(i){
       vIdx = Math.max(0, Math.min(totalPages - 1, i));
-      vTitle.textContent = 'Página ' + (vIdx + 1) + ' de ' + totalPages;
+      vTitle.textContent = 'Página ' + pageNumbers[vIdx] + ' de ' + lastNum;
       vPrev.disabled = vIdx <= 0;
       vNext.disabled = vIdx >= totalPages - 1;
       vImg.style.opacity = '0.35';
