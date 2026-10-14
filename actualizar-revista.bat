@@ -8,11 +8,14 @@ echo   Actualizando Revista Digital en GitHub
 echo ============================================
 echo.
 
+echo Optimizando imagenes (PNG a JPG liviano)...
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0optimizar-imagenes.ps1"
+
 echo Sincronizando "Revista Digital.html" con "index.html"...
 copy /Y "Revista Digital.html" "index.html" >nul
 
 echo Generando lista de paginas (pages.js)...
-powershell -NoProfile -Command "$n = Get-ChildItem -Filter '*.png' | Where-Object { $_.BaseName -match '^\d+$' } | ForEach-Object { [int]$_.BaseName } | Sort-Object; 'window.PAGES = [' + ($n -join ',') + '];' | Set-Content -Encoding ASCII pages.js"
+powershell -NoProfile -Command "$n = Get-ChildItem -Filter '*.jpg' | Where-Object { $_.BaseName -match '^\d+$' } | ForEach-Object { [int]$_.BaseName } | Sort-Object; 'window.PAGES = [' + ($n -join ',') + '];' | Set-Content -Encoding ASCII pages.js"
 
 echo Revisando cambios...
 git add -A
