@@ -1,0 +1,3 @@
+# Los PNG originales (pesados) se quedan solo en tu computadora;
+# a GitHub se suben los JPG optimizados que genera actualizar-revista.bat
+*.png

@@ -479,9 +479,23 @@
     return new Promise(function(resolve){
       var img = new Image();
       img.onload = function(){ resolve(num); };
-      img.onerror = function(){ resolve(null); };
-      img.src = num + '.png';
+      img.onerror = function(){
+        var png = new Image();
+        png.onload = function(){ resolve(num); };
+        png.onerror = function(){ resolve(null); };
+        png.src = num + '.png';
+      };
+      img.src = num + '.jpg';
     });
+  }
+
+  // Las páginas se publican como JPG (liviano); el PNG sirve de respaldo al
+  // abrir el archivo en local antes de optimizar.
+  function setPageSrc(img, num){
+    img.addEventListener('error', function(){
+      if (img.src.slice(-4) === '.jpg') { img.src = num + '.png'; }
+    });
+    img.src = num + '.jpg';
   }
 
   function discoverPages(){
@@ -511,7 +525,7 @@
       inner.className = 'page-inner';
 
       var img = document.createElement('img');
-      img.src = num + '.png';
+      setPageSrc(img, num);
       img.alt = 'Página ' + num;
       img.decoding = 'async';
       img.loading = (idx < 4) ? 'eager' : 'lazy';
@@ -697,9 +711,13 @@
         vImg.style.opacity = '1';
         vFit();
       };
-      vImg.src = pageNumbers[vIdx] + '.png';
+      var vNum = pageNumbers[vIdx];
+      vImg.onerror = function(){
+        if (vImg.src.slice(-4) === '.jpg') { vImg.src = vNum + '.png'; }
+      };
+      vImg.src = vNum + '.jpg';
       [vIdx - 1, vIdx + 1].forEach(function(j){
-        if (j >= 0 && j < totalPages) { new Image().src = pageNumbers[j] + '.png'; }
+        if (j >= 0 && j < totalPages) { new Image().src = pageNumbers[j] + '.jpg'; }
       });
     }
     function openViewer(){
