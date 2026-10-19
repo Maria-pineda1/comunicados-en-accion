@@ -8,6 +8,6 @@ window.INDICE = [
   { t: "Promociones para tus clientes", p: 30 },
   { t: "Promociones para ti", p: 42 },
   { t: "Competencias", p: 45 },
-  { t: "Premiaciones Septiembre", p: 50 },
-  { t: "Síguenos en nuestras redes", p: 55 }
+  { t: "Premiaciones Septiembre", p: 48 },
+  { t: "Síguenos en nuestras redes", p: 53 }
 ];
