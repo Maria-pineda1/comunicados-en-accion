@@ -7,8 +7,9 @@ window.INDICE = [
   { t: "Anuncios importantes", p: 20 },
   { t: "Calendario Noviembre", p: 37 },
   { t: "Promociones para tus clientes", p: 39 },
-  { t: "Promociones para ti", p: 45 },
-  { t: "Competencias", p: 48 },
-  { t: "Premiaciones Octubre", p: 53 },
-  { t: "Síguenos en nuestras redes", p: 57 }
+  { t: "Black Friday", p: 40 },
+  { t: "Promociones para ti", p: 53 },
+  { t: "Competencias", p: 56 },
+  { t: "Premiaciones Octubre", p: 61 },
+  { t: "Síguenos en nuestras redes", p: 65 }
 ];
